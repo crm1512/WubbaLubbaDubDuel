@@ -1,82 +1,39 @@
 package models;
 
-public class Card {
+import jakarta.persistence.*;
+import lombok.*;
 
-    // Atributtes
-    private int id;
-    private String name;
-    private String description;
-    private int hp;
-    private int attack;
-    private String image;
-    private int cost;
+/**
+ * Representa una carta genérica en el juego. Esta clase es abstracta y se
+ * extenderá por diferentes tipos de cartas (por ejemplo, CharacterCard,
+ * SpellCard, etc.).
+ */
 
-    //Constructor
-    public Card(int id, String name, String description, int hp, int attack, String image, int cost) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.hp = hp;
-        this.attack = attack;
-        this.image = image;
-        this.cost = cost;
-    }
+@MappedSuperclass // Indica que esta clase es una clase base que no se mapea directamente a una
+					// tabla, pero sus campos se heredan por otras entidades.
+@Data // Lombok genera automáticamente los métodos getters, setters, toString, equals,
+		// y hashCode.
+@NoArgsConstructor(force = true) // Constructores automaticos
+@AllArgsConstructor
+public abstract class Card {
 
-    // Getters y Setters
+	@Id // Define que este campo es la clave primaria de la tabla.
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente el valor del campo, normalmente
+														// utilizado para auto-incremento.
+	private int id;
 
-    public int getId() {
-        return id;
-    }
+	private String name;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	private String description;
 
-    public String getName() {
-        return name;
-    }
+	private int cost;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	private String image;
 
-    public String getDescription() {
-        return description;
-    }
+	// Relación con el usuario
+	@ManyToOne // Muchas cartas pueden pertenecer a un solo usuario.
+	@JoinColumn(name = "user_id") // Nombre de la columna en la tabla de cartas para almacenar la relación con el
+									// usuario.
+	private User user; // El usuario que posee esta carta.
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-    
-    public int getCost() {
-        return cost;
-    }
-    
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
 }
