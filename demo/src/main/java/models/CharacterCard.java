@@ -14,9 +14,9 @@ import lombok.*;
 @AllArgsConstructor 
 public class CharacterCard extends Card {
 
-    private int attack; // Poder de ataque de la carta de personaje.
+    private int attack;
 
-    private int health; // Salud del personaje de la carta.
+    private int health; 
 
     // Constructor que hereda de la clase base Card
     public CharacterCard(String name, String description, int cost, String image, int attack, int health, User user) {

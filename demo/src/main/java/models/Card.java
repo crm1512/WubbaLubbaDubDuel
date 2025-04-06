@@ -13,7 +13,7 @@ import lombok.*;
 					// tabla, pero sus campos se heredan por otras entidades.
 @Data // Lombok genera automáticamente los métodos getters, setters, toString, equals,
 		// y hashCode.
-@NoArgsConstructor(force = true) // Constructores automaticos
+@NoArgsConstructor // Constructores automaticos
 @AllArgsConstructor
 public abstract class Card {
 
@@ -36,4 +36,12 @@ public abstract class Card {
 									// usuario.
 	private User user; // El usuario que posee esta carta.
 
+	public Card(String name, String description, int cost, String image, User user) {
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+        this.image = image;
+        this.user = user;
+    }
+	
 }
