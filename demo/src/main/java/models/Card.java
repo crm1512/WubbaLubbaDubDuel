@@ -20,7 +20,7 @@ public abstract class Card {
 	@Id // Define que este campo es la clave primaria de la tabla.
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente el valor del campo, normalmente
 														// utilizado para auto-incremento.
-	private int id;
+	private Long  id;
 
 	private String name;
 

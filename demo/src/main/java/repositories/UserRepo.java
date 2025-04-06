@@ -6,6 +6,15 @@ import models.User;
 
 @Repository
 public interface UserRepo extends JpaRepository<User, Long> {
-    // Puedes agregar consultas personalizadas si es necesario, por ejemplo, encontrar por nombre de usuario
-    User findByUsername(String username);
+	// Buscar un usuario por su nombre
+	User findByUsername(String username);
+	
+	// Verificar si un usuario con un nombre de usuario específico ya existe
+	boolean existsByUsername(String username);
+	
+	// Verificar si un usuario con un nombre de usuario específico ya existe
+	boolean existsByEmail(String email);
+
+	// Buscar un usuario por su correo electrónico
+	User findByEmail(String email);
 }

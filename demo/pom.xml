@@ -63,13 +63,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Dependencia personalizada -->
-		<dependency>
-			<groupId>com.mycompany</groupId>
-			<artifactId>Estructuras</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>

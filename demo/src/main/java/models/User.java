@@ -19,7 +19,7 @@ public class User {
 
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Define la estrategia para la generación automática del valor del campo (auto-incremental).
-    private int id; // Identificador único del usuario.
+    private Long  id; // Identificador único del usuario.
 
     private String username; 
 
