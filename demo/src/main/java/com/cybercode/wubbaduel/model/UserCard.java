@@ -1,4 +1,4 @@
-package models;
+package com.cybercode.wubbaduel.model;
 
 import jakarta.persistence.*;
 import lombok.*;

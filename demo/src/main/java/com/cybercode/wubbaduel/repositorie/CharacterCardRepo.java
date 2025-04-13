@@ -1,7 +1,7 @@
-package repositories;
+package com.cybercode.wubbaduel.repositorie;
 
 
-import models.CharacterCard;
+import com.cybercode.wubbaduel.model.CharacterCard;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

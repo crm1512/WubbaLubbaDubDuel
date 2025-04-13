@@ -1,7 +1,7 @@
-package services;
+package com.cybercode.wubbaduel.service;
 
-import models.Deck;
-import repositories.DeckRepo;
+import com.cybercode.wubbaduel.model.Deck;
+import com.cybercode.wubbaduel.repositorie.DeckRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

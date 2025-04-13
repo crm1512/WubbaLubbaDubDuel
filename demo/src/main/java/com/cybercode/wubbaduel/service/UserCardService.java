@@ -1,9 +1,9 @@
-package services;
+package com.cybercode.wubbaduel.service;
 
-import models.Card;
-import models.User;
-import models.UserCard;
-import repositories.UserCardRepo;
+import com.cybercode.wubbaduel.model.Card;
+import com.cybercode.wubbaduel.model.User;
+import com.cybercode.wubbaduel.model.UserCard;
+import com.cybercode.wubbaduel.repositorie.UserCardRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
