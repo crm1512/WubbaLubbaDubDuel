@@ -1,35 +1,34 @@
 package models;
-
-public class Card {
-
+import jakarta.persistence.*;
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Card {
     // Atributtes
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
     private String description;
-    private int hp;
-    private int attack;
+    @Column(name = "image")
     private String image;
-    private int cost;
 
     //Constructor
-    public Card(int id, String name, String description, int hp, int attack, String image, int cost) {
+    public Card(Long id, String name, String description, String image) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.hp = hp;
-        this.attack = attack;
         this.image = image;
-        this.cost = cost;
+
     }
+
+    public Card(){}
 
     // Getters y Setters
 
-    public int getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -48,22 +47,6 @@ public class Card {
         this.description = description;
     }
 
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
     public String getImage() {
         return image;
     }
@@ -71,4 +54,5 @@ public class Card {
     public void setImage(String image) {
         this.image = image;
     }
+
 }
