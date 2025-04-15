@@ -1,4 +1,4 @@
-package models;
+package com.cybercode.wubbaduel.app.models;
 import jakarta.persistence.*;
 
 @Entity
