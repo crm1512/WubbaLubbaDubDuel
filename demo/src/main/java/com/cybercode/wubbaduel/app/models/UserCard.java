@@ -2,7 +2,7 @@ package com.cybercode.wubbaduel.app.models;
 
 import jakarta.persistence.*;
 @Entity
-@Table(name = "user_cards")
+@Table(name = "user_card")
 public class UserCard {
 
     // Attributes

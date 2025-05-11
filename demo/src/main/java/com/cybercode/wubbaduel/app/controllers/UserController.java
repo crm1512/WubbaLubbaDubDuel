@@ -3,6 +3,7 @@ package com.cybercode.wubbaduel.app.controllers;
 import com.cybercode.wubbaduel.app.models.User;
 import com.cybercode.wubbaduel.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -40,6 +41,34 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
+    }
+
+    // Añadir 100 tokens al usuario
+    @PostMapping("/{id}/add-tokens")
+    public ResponseEntity<?> addTokens(@PathVariable Long userId) {
+        Optional<User> user = userService.getUserById(userId);
+        if (user.isPresent()) {
+            User foundUser = user.get();
+            foundUser.setTokens(foundUser.getTokens() + 100); // Añado 100 tokens
+            userService.save(foundUser);
+            return ResponseEntity.ok("Se han añadido 100 tokens al usuario: " + foundUser.getUsername());
+        } else {
+            return ResponseEntity.status(404).body("No se ha encontrado al usuario");
+        }
+    }
+
+    // Añadir una cantidad personalizada de tokens al usuario
+    @PostMapping("/{id}/add-tokens/{tokens}")
+    public ResponseEntity<?> addCustomTokens(@PathVariable Long userId, @PathVariable int tokens) {
+        Optional<User> user = userService.getUserById(userId);
+        if (user.isPresent()) {
+            User foundUser = user.get();
+            foundUser.setTokens(foundUser.getTokens() + tokens);
+            userService.save(foundUser);
+            return ResponseEntity.ok("Se han añadido " + tokens + " tokens al usuario: " + foundUser.getUsername());
+        } else {
+            return ResponseEntity.status(404).body("No se ha encontrado al usuario");
+        }
     }
 }
 

@@ -10,4 +10,5 @@ public interface CardRepository extends JpaRepository<Card, Long> {
     Card findByName(String name);
 
     List<Card> findByCostLessThanEqual(int cost);
+
 }

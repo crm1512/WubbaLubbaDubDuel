@@ -16,5 +16,5 @@ public interface CharacterCardRepository extends JpaRepository<CharacterCard, Lo
     List<CharacterCard> findByCostGreaterThan(int cost);
 
     // Buscar todas las cartas de personajes de un usuario
-    List<CharacterCard> findByUserId(Long userId);
+    //List<CharacterCard> findByUser_Id(Long userId);
 }

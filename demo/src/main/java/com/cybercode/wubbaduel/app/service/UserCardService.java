@@ -40,7 +40,7 @@ public class UserCardService {
 
     // Obtener todas las cartas de un usuario por el ID del usuario
     public List<UserCard> getUserCards(Long userId) {
-        return userCardRepo.findByUserId(userId);
+        return userCardRepo.findAllByUserId(userId);
     }
 
     // Obtener cartas de un usuario con cantidad mayor a un valor específico

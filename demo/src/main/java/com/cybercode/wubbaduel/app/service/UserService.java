@@ -26,7 +26,7 @@ public class UserService {
         return userRepo.findByUsername(username);
     }
 
-    public User getUserByEmail(String email) {
+    public Optional<User> getUserByEmail(String email) {
         return userRepo.findByEmail(email);
     }
 
@@ -45,4 +45,10 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepo.deleteById(id);
     }
+
+    public void save(User user) {
+        userRepo.save(user);
+    }
+
+
 }

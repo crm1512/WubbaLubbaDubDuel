@@ -14,8 +14,8 @@ public class BoardCard extends Card {
     public BoardCard() {
     }
 
-    public BoardCard(Long id, String name, String description, String image, String effect, String condition) {
-        super(id, name, description, image);
+    public BoardCard(Long id, String name, String description, String image, int cost, Rarity rarity, Type type, String effect, String condition) {
+        super(id, name, description, image, cost, rarity, type);
         this.effect = effect;
         this.condition = condition;
     }

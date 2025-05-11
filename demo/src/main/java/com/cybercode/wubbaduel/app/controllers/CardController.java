@@ -19,10 +19,11 @@ public class CardController {
     }
 
     // Obtener todas las cartas
-    @GetMapping
+    @GetMapping("/cards")
     public List<Card> getAllCards() {
         return cardService.getAllCards();
     }
+
 
     // Obtener una carta por su ID
     @GetMapping("/{id}")

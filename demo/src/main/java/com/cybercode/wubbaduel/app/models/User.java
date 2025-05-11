@@ -6,16 +6,28 @@ import java.util.Set;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     // Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name")
+    private String name;
+    @Column(name = "lastname")
+    private String lastname;
+
     @Column(name = "username", unique = true)
     private String username;
     @Column(name = "email", unique = true)
     private String email;
+    @Column(name = "password", unique = true)
+    private String password;
+    @Column(name = "avatar")
+    private String avatar;
+    @Column(name = "tokens")
+    private int tokens = 0;
     @ManyToMany
     private Set<Card> cards = new HashSet<>();
     @ManyToMany
@@ -23,14 +35,34 @@ public class User {
 
 
     // Constructor
-    public User(String username, String password, String email) {
+    public User(String name, String lastname, String username, String password, String email,String avatar, int tokens) {
+        this.name = name;
+        this.lastname = lastname;
         this.username = username;
         this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.tokens = tokens;
         this.cards = new HashSet<>();
         this.decks = new HashSet<>();
     }
 
+    public User() {
+    }
+
     // Getters and Setters
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getLastname() {
+        return lastname;
+    }
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
     public Long getId() {
         return id;
     }
@@ -53,6 +85,26 @@ public class User {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public int getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(int tokens) {
+        this.tokens = tokens;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public Set<Card> getCards() {
         return cards;

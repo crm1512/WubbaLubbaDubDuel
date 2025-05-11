@@ -2,6 +2,7 @@ package com.cybercode.wubbaduel.app.service;
 
 import com.cybercode.wubbaduel.app.models.Card;
 import com.cybercode.wubbaduel.app.repositories.CardRepository;
+import com.cybercode.wubbaduel.app.repositories.UserCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

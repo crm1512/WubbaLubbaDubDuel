@@ -11,8 +11,8 @@ public class ItemCard extends Card{
     public ItemCard() {
     }
 
-    public ItemCard(Long id, String name, String description, String image, String effect){
-        super(id, name, description, image);
+    public ItemCard(Long id, String name, String description, String image, int cost, Rarity rarity, Type type, String effect){
+        super(id, name, description, image, cost, rarity, type);
 
         this.effect = effect;
     }

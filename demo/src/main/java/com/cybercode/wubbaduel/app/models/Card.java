@@ -14,13 +14,26 @@ public abstract class Card {
     @Column(name = "image")
     private String image;
 
-    //Constructor
-    public Card(Long id, String name, String description, String image) {
+    @Column(name = "cost")
+    private int cost;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "rarity")
+    private Rarity rarity;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private Type type;
+
+    // Constructor
+    protected Card(Long id, String name, String description, String image, int cost, Rarity rarity, Type type) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.image = image;
-
+        this.cost = cost;
+        this.rarity = rarity;
+        this.type = type;
     }
 
     public Card(){}
@@ -54,5 +67,23 @@ public abstract class Card {
     public void setImage(String image) {
         this.image = image;
     }
+    public int getCost() {
+        return cost;
+    }
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
 
+    public Rarity getRarity() {
+        return rarity;
+    }
+    public void setRarity(Rarity rarity) {
+        this.rarity = rarity;
+    }
+    public Type getType() {
+        return type;
+    }
+    public void setType(Type type) {
+        this.type = type;
+    }
 }

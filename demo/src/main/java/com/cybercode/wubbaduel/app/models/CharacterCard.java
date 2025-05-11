@@ -8,19 +8,28 @@ public class CharacterCard extends Card {
     private int hp;
     @Column(name = "attack")
     private int attack;
-    @Column(name = "cost")
-    private int cost;
+
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "specie")
+    private String specie;
+
+    @Column(name = "origin")
+    private String origin;
 
     //Constructor
     public CharacterCard() {
     }
 
-    public CharacterCard(Long id, String name, String description, String image,
-                         int hp, int attack, int cost){
-        super(id, name, description, image);
+    public CharacterCard(Long id, String name, String description, String image, int cost, Rarity rarity, Type type,
+                         String gender, String specie, String origin, int hp, int attack) {
+        super(id, name, description, image, cost, rarity, type);
         this.hp = hp;
         this.attack = attack;
-        this.cost = cost;
+        this.gender = gender;
+        this.specie = specie;
+        this.origin = origin;
     }
 
     // Getters & Setters
@@ -40,11 +49,28 @@ public class CharacterCard extends Card {
         this.attack = attack;
     }
 
-    public int getCost() {
-        return cost;
+    public String getGender(){
+        return  gender;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
+    public void setGender(String gender){
+        this.gender = gender;
     }
+
+    public String getSpecie(){
+        return specie;
+    }
+
+    public void setSpecie(String specie){
+        this.specie = specie;
+    }
+
+    public String getOrigin(){
+        return origin;
+    }
+
+    public void setOrigin(String origin){
+        this.origin = origin;
+    }
+
 }
