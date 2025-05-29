@@ -1,0 +1,34 @@
+package com.cybercode.wubbaduel.app.controllers;
+
+import com.cybercode.wubbaduel.app.models.CharacterCard;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import com.cybercode.wubbaduel.app.service.CharacterCardService;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/character-cards")
+public class CharacterCardController {
+
+    private final CharacterCardService characterCardService;
+
+    @Autowired
+    public CharacterCardController(CharacterCardService characterCardService) {
+        this.characterCardService = characterCardService;
+    }
+
+    // Obtener todas las cartas de personajes
+    @GetMapping
+    public List<CharacterCard> getAllCharacterCards() {
+        return characterCardService.getAllCharacterCards();
+    }
+
+    // Obtener una carta de personaje por su ID
+    @GetMapping("/{id}")
+    public Optional<CharacterCard> getCharacterCardById(@PathVariable Long id) {
+        return characterCardService.getCharacterCardById(id);
+    }
+
+}
