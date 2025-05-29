@@ -60,11 +60,12 @@ public class UserService {
     }
 
     public long countAllUsers() {
-        return userRepository.count();
+        return userRepo.count();
     }
 
     public long countUsersExcluding(Long userId) {
-        return userRepository.countByIdNot(userId);
+        return userRepo.countByIdNot(userId);
     }
+
 
 }
