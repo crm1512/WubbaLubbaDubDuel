@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.List;
 
 @RestController //Convierte a json automaticamente es magia
 @RequestMapping("api/user")
@@ -55,6 +56,33 @@ public class UserController {
         } else {
             return ResponseEntity.status(404).body("No se ha encontrado al usuario");
         }
+    }
+
+    @PostMapping("/list")
+    public ResponseEntity<?> getUsersPaginated(@RequestBody Map<String, Object> payload) {
+        int page = Integer.parseInt(payload.get("page").toString());
+        int pageSize = 9;
+
+        List<User> users;
+
+        if (payload.containsKey("userId")) {
+            Long userId = Long.valueOf(payload.get("userId").toString());
+            users = userService.getUsersExcludingUser(userId, page, pageSize);
+        } else {
+            users = userService.getAllUsersPaginated(page, pageSize);
+        }
+
+        List<Map<String, Object>> result = users.stream().map(user -> {
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("id", user.getId());
+            userData.put("username", user.getUsername());
+            userData.put("avatar", user.getAvatar());
+            userData.put("email", user.getEmail());
+            userData.put("tokens", user.getTokens());
+            return userData;
+        }).toList();
+
+        return ResponseEntity.ok(result);
     }
 
 }

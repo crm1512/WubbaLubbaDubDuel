@@ -5,7 +5,10 @@ import com.cybercode.wubbaduel.app.models.User;
 import com.cybercode.wubbaduel.app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,5 +49,14 @@ public class UserService {
         userRepo.save(user);
     }
 
+    public List<User> getUsersExcludingUser(Long excludeUserId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return userRepo.findByIdNot(excludeUserId, pageable);
+    }
+
+    public List<User> getAllUsersPaginated(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return userRepo.findAll(pageable).getContent();
+    }
 
 }
