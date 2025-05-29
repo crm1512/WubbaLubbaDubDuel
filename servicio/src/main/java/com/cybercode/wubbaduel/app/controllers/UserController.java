@@ -64,12 +64,15 @@ public class UserController {
         int pageSize = 9;
 
         List<User> users;
+        long totalUsers;
 
         if (payload.containsKey("userId")) {
             Long userId = Long.valueOf(payload.get("userId").toString());
             users = userService.getUsersExcludingUser(userId, page, pageSize);
+            totalUsers = userService.countUsersExcluding(userId); // <-- Asegúrate de tener este método
         } else {
             users = userService.getAllUsersPaginated(page, pageSize);
+            totalUsers = userService.countAllUsers(); // <-- Y este también
         }
 
         List<Map<String, Object>> result = users.stream().map(user -> {
@@ -82,8 +85,13 @@ public class UserController {
             return userData;
         }).toList();
 
-        return ResponseEntity.ok(result);
+        Map<String, Object> response = new HashMap<>();
+        response.put("users", result);
+        response.put("totalUsers", totalUsers);
+
+        return ResponseEntity.ok(response);
     }
+
 
 }
 
