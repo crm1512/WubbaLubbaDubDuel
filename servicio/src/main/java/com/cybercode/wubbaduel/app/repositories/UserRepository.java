@@ -22,4 +22,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByIdNot(Long excludedId, Pageable pageable);
 
+    long countByIdNot(Long id);
+
 }

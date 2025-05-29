@@ -59,4 +59,12 @@ public class UserService {
         return userRepo.findAll(pageable).getContent();
     }
 
+    public long countAllUsers() {
+        return userRepository.count();
+    }
+
+    public long countUsersExcluding(Long userId) {
+        return userRepository.countByIdNot(userId);
+    }
+
 }
