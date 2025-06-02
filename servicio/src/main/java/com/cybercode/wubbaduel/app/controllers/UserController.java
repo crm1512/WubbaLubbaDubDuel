@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Optional;
@@ -82,6 +83,7 @@ public class UserController {
             userData.put("avatar", user.getAvatar());
             userData.put("email", user.getEmail());
             userData.put("tokens", user.getTokens());
+            userData.put("createdDate", user.getCreatedAt());
             return userData;
         }).toList();
 
@@ -91,6 +93,36 @@ public class UserController {
 
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/update-last-login")
+    public ResponseEntity<?> updateLastLogin(@RequestBody Map<String, Object> payload) {
+        try {
+            Long userId = Long.valueOf(payload.get("userId").toString());
+            Optional<User> userOpt = userService.getUserById(userId);
+
+            if (userOpt.isEmpty()) {
+                return ResponseEntity.status(404).body("Usuario no encontrado");
+            }
+
+            User user = userOpt.get();
+            user.setLastLogin(LocalDateTime.now());
+            userService.save(user);
+
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("id", user.getId());
+            userData.put("username", user.getUsername());
+            userData.put("avatarUrl", user.getAvatar());
+            userData.put("email", user.getEmail());
+            userData.put("tokens", user.getTokens());
+            userData.put("createdAt", user.getCreatedAt());
+            userData.put("lastLogin", user.getLastLogin());
+
+            return ResponseEntity.ok(userData);
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("Error al actualizar lastLogin: " + e.getMessage());
+        }
+    }
+
 
 
 }

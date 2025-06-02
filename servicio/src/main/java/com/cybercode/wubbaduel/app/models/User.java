@@ -2,6 +2,7 @@ package com.cybercode.wubbaduel.app.models;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 
@@ -28,6 +29,13 @@ public class User {
     private String avatar;
     @Column(name = "tokens")
     private int tokens = 0;
+
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "last_login")
+    private LocalDateTime lastLogin;
+
     @ManyToMany
     private Set<Card> cards = new HashSet<>();
     @ManyToMany
@@ -45,6 +53,7 @@ public class User {
         this.tokens = tokens;
         this.cards = new HashSet<>();
         this.decks = new HashSet<>();
+        this.createdAt = LocalDateTime.now();
     }
 
     public User() {
@@ -120,6 +129,22 @@ public class User {
 
     public void setDecks(Set<Deck> decks) {
         this.decks = decks;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(LocalDateTime lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
 

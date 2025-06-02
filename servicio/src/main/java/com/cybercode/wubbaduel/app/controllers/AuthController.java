@@ -31,8 +31,10 @@ public class AuthController {
                     user.getId(),
                     user.getUsername(),
                     user.getEmail(),
-                    user.getAvatar(), // podemos poner un default
-                    user.getTokens()  // podemos poner un default
+                    user.getAvatar(),
+                    user.getTokens(),
+                    user.getCreatedAt(),
+                    user.getLastLogin()
             );
 
             return ResponseEntity.ok(dto);
@@ -52,7 +54,9 @@ public class AuthController {
                     u.getUsername(),
                     u.getEmail(),
                     u.getAvatar(),
-                    u.getTokens()
+                    u.getTokens(),
+                    u.getCreatedAt(),
+                    u.getLastLogin()
             );
             return ResponseEntity.ok(dto);
         } else {

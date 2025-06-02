@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -31,6 +33,8 @@ public class AuthService {
         newUser.setEmail(email);
         newUser.setPassword(hashedPassword);
         newUser.setTokens(500);
+        LocalDateTime time = LocalDateTime.now();
+        newUser.setCreatedAt(time);
         int randomId = ThreadLocalRandom.current().nextInt(1, 827); // 827 no cuenta es hasta 826
         String avatarUrl = "https://rickandmortyapi.com/api/character/avatar/" + randomId + ".jpeg";
         newUser.setAvatar(avatarUrl);
