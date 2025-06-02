@@ -85,18 +85,33 @@ public class UserCardService {
         userCardRepo.deleteById(id);
     }
 
-    public UserCard updateCardQuantity(Long userId, Long cardId, int newQuantity) {
+    public UserCard updateCardQuantity(Long userId, Long cardId, int quantityToAdd) {
         UserCardId id = new UserCardId(userId, cardId);
         Optional<UserCard> userCardOptional = userCardRepo.findById(id);
 
         if (userCardOptional.isPresent()) {
             UserCard userCard = userCardOptional.get();
-            userCard.setQuantity(newQuantity);
+            userCard.setQuantity(userCard.getQuantity() + quantityToAdd);
             return userCardRepo.save(userCard);
         } else {
-            throw new RuntimeException("Carta no encontrada para el usuario y carta especificados.");
+            Optional<User> userOpt = userService.getUserById(userId);
+            if (userOpt.isEmpty()) {
+                throw new RuntimeException("Usuario no encontrado con ID: " + userId);
+            }
+            User user = userOpt.get();
+
+            Card card = cardService.getCardById(cardId);
+            if (card == null) {
+                throw new RuntimeException("Carta no encontrada con ID: " + cardId);
+            }
+
+            UserCard newUserCard = new UserCard(user, card, quantityToAdd);
+            return userCardRepo.save(newUserCard);
         }
     }
+
+
+
 
     public boolean userHasCard(Long userId, Long cardId) {
         return userCardRepo.findByUserIdAndCardId(userId, cardId) != null;

@@ -40,13 +40,20 @@ public class UserCardController {
         userCardService.removeUserCard(userId, cardId);
     }
 
-    // Actualizar la cantidad de una carta de usuario
-    @PutMapping("/{userId}/card/{cardId}")
-    public UserCard updateQuantity(
-            @PathVariable Long userId,
-            @PathVariable Long cardId,
-            @RequestParam int quantity) {
-        return userCardService.updateCardQuantity(userId, cardId, quantity);
+    // Añadir o actualizar la cantidad de una carta de usuario
+    @PostMapping("/add")
+    public ResponseEntity<UserCard> addOrUpdateCard(@RequestBody Map<String, Object> payload) {
+        try {
+            Long userId = Long.valueOf(payload.get("userId").toString());
+            Long cardId = Long.valueOf(payload.get("cardId").toString());
+            int quantity = Integer.parseInt(payload.get("quantity").toString());
+
+            UserCard result = userCardService.updateCardQuantity(userId, cardId, quantity);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(400).body(null);
+        }
     }
 
     // Abrir sobre segun rareza
